@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>CALCULATOR DELUX 200 - BETA</title>
+</head>
+<body style="background-color: #222222; color: #ffffff">
+    <div id="myData"></div>
+    <script>
+        const calculate = (op) => {
+            fetch("https://localhost:7173/Calculator/" + document.getElementById("a").value + "/" + op + "/" + document.getElementById("b").value)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    appendData(data);
+                })
+                .catch(function (err) {
+                    console.log('error: ' + err);
+                });
+                function appendData(data) {
+                    var mainContainer = document.getElementById("myData");
+                    mainContainer.innerHTML=data;
+            }
+        }
+    </script>
+
+    <div>
+        <input type="text" id="a" value="0" />
+        <input type="text" id="b" value="0" /><br />
+        <button onclick="calculate('+')">Add!</button><br />
+        <button onclick="calculate('-')">Substract!</button><br />
+        <button onclick="calculate('*')">Multiply!</button><br />
+        <button onclick="calculate(',')">Divide!</button>
+    </div>
+
+</body>
+</html>
